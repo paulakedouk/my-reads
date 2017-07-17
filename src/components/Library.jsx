@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
 import Bookshelf from './Bookshelf';
+// import * as BooksAPI from '../BooksAPI';
 
 class Library extends Component {
+  state = {
+    allbooks: []
+  };
+
+  // componentDidMount() {
+  //   BooksAPI.getAll().then(allbooks => {
+  //     this.setState({ allbooks });
+  //   });
+  //   console.log(this.state.allbooks);
+  // }
+
   render() {
     return (
       <div className="app">

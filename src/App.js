@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import * as BooksAPI from './BooksAPI';
-import './App.css';
 import Library from './components/Library';
+import * as BooksAPI from './BooksAPI';
+import Search from './components/Search';
+import './App.css';
 
 class App extends Component {
   state = {
@@ -14,12 +15,14 @@ class App extends Component {
     BooksAPI.getAll().then(books => {
       this.setState({ books });
     });
+    console.log(this.state.books);
   }
 
   render() {
     return (
       <div>
         <Route exact path="/" render={() => <Library />} />
+        <Route path="/search" component={Search} />
       </div>
     );
   }

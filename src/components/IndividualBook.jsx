@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class IndividualBook extends Component {
   render() {
     const { image } = this.props;
+
     return (
       <div className="book">
         <div className="book-top">
@@ -15,11 +17,21 @@ class IndividualBook extends Component {
             }}
           />
         </div>
-        <div className="book-title">Book title</div>
-        <div className="book-authors">Book author</div>
+        <div className="book-title">
+          {this.props.title}
+        </div>
+        <div className="book-authors">
+          {this.props.author}
+        </div>
       </div>
     );
   }
 }
+
+IndividualBook.PropTypes = {
+  title: PropTypes.string,
+  author: PropTypes.string,
+  image: PropTypes.string
+};
 
 export default IndividualBook;
