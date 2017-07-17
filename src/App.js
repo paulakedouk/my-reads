@@ -3,9 +3,8 @@ import { Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 import Library from './components/Library';
-import Search from './components/Search';
 
-class App extends React.Component {
+class App extends Component {
   state = {
     // showSearchPage: true,
     books: []
@@ -21,7 +20,6 @@ class App extends React.Component {
     return (
       <div>
         <Route exact path="/" render={() => <Library />} />
-        <Route path="/search" component={Search} />
       </div>
     );
   }

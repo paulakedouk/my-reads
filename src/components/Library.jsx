@@ -9,6 +9,9 @@ class Library extends Component {
             <h1>MyReads</h1>
           </div>
         </div>
+        <div className="list-books-content">
+          <div>List of books</div>
+        </div>
       </div>
     );
   }
