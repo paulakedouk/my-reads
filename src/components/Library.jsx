@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Bookshelf from './Bookshelf';
 
 class Library extends Component {
   render() {
@@ -10,7 +11,11 @@ class Library extends Component {
           </div>
         </div>
         <div className="list-books-content">
-          <div>List of books</div>
+          <div>
+            <Bookshelf title="Currently Reading" />
+            <Bookshelf title="Want to Read" />
+            <Bookshelf title="Read" />
+          </div>
         </div>
       </div>
     );
