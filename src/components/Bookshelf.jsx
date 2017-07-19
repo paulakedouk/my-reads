@@ -3,7 +3,7 @@ import IndividualBook from './IndividualBook';
 
 function Bookshelf(props) {
   let dataBook = props.dataBook;
-  // let shelf = props.shelf;
+  let shelf = props.shelf;
   let title = props.title;
 
   return (
@@ -13,7 +13,7 @@ function Bookshelf(props) {
       </h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
-          {dataBook.map(book => <IndividualBook book={book} key={book.id} />)}
+          {dataBook.map(book => <IndividualBook shelf={shelf} book={book} key={book.id} />)}
         </ol>
       </div>
     </div>
