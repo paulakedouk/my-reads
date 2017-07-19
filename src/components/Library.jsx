@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Bookshelf from './Bookshelf';
 import * as BooksAPI from '../BooksAPI';
+import { Link } from 'react-router-dom';
 // import sortBy from 'sort-by';
 
 class Library extends Component {
   state = {
-    // showSearchPage: true,
     books: []
   };
 
@@ -16,8 +16,9 @@ class Library extends Component {
   }
 
   render() {
+    // console.log(this.state.books);
     return (
-      <div className="app">
+      <div>
         <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
@@ -25,10 +26,13 @@ class Library extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf title="Currently Reading" shelves={`currentlyReading`} books={this.state.books} />
-            <Bookshelf title="Want to Read" shelves={`wantToRead`} books={this.state.books} />
-            <Bookshelf title="Read" shelves={`read`} books={this.state.books} />
+            <Bookshelf title="Currently Reading" shelf={`currentlyReading`} dataBook={this.state.books} />
+            <Bookshelf title="Want to read" shelf={`wantToRead`} dataBook={this.state.books} />
+            <Bookshelf title="Read" shelf={`read`} dataBook={this.state.books} />
           </div>
+        </div>
+        <div className="open-search">
+          <Link to="/search">Add a book</Link>
         </div>
       </div>
     );
