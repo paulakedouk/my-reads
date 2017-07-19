@@ -1,43 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class IndividualBook extends Component {
-  render() {
-    let book = this.props.book;
-    // console.log(this.props.dataBook);
-    return (
-      <div>
-        <li className="book">
-          <div className="book-top">
-            <div
-              className="book-cover"
-              style={{
-                width: 128,
-                height: 193,
-                backgroundImage: `url(${book.imageLinks.thumbnail})`
-              }}
-            />
-            <div className="book-shelf-changer">
-              <select>
-                <option value="none" disabled>
-                  Move to...
-                </option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
-              </select>
-            </div>
+function IndividualBook(props) {
+  // console.log(this.props.dataBook);
+  let book = props.book;
+  return (
+    <div>
+      <li className="book">
+        <div className="book-top">
+          <div
+            className="book-cover"
+            style={{
+              width: 128,
+              height: 193,
+              backgroundImage: `url(${book.imageLinks.thumbnail})`
+            }}
+          />
+          <div className="book-shelf-changer">
+            <select>
+              <option value="none" disabled>
+                Move to...
+              </option>
+              <option value="currentlyReading">Currently Reading</option>
+              <option value="wantToRead">Want to Read</option>
+              <option value="read">Read</option>
+              <option value="none">None</option>
+            </select>
           </div>
-          <div className="book-title">
-            {book.title}
-          </div>
-          <div className="book-authors">
-            {book.authors}
-          </div>
-        </li>
-      </div>
-    );
-  }
+        </div>
+        <div className="book-title">
+          {book.title}
+        </div>
+        <div className="book-authors">
+          {book.authors}
+        </div>
+      </li>
+    </div>
+  );
 }
 
 export default IndividualBook;
