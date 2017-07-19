@@ -12,16 +12,15 @@ class App extends Component {
   };
 
   componentDidMount() {
-    BooksAPI.getAll().then(books => {
-      this.setState({ books });
+    BooksAPI.getAll().then(filterBooks => {
+      this.setState({ books: filterBooks });
     });
-    console.log(this.state.books);
   }
 
   render() {
     return (
       <div>
-        <Route exact path="/" render={() => <Library />} />
+        <Route exact path="/" render={() => <Library books={this.state.books} />} />
         <Route path="/search" component={Search} />
       </div>
     );

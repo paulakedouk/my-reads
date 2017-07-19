@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import Bookshelf from './Bookshelf';
-// import * as BooksAPI from '../BooksAPI';
+import * as BooksAPI from '../BooksAPI';
+// import sortBy from 'sort-by';
 
 class Library extends Component {
   state = {
-    allbooks: []
+    // showSearchPage: true,
+    books: []
   };
 
-  // componentDidMount() {
-  //   BooksAPI.getAll().then(allbooks => {
-  //     this.setState({ allbooks });
-  //   });
-  //   console.log(this.state.allbooks);
-  // }
+  componentDidMount() {
+    BooksAPI.getAll().then(filterBooks => {
+      this.setState({ books: filterBooks });
+    });
+  }
 
   render() {
     return (
@@ -24,9 +25,9 @@ class Library extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf title="Currently Reading" />
-            <Bookshelf title="Want to Read" />
-            <Bookshelf title="Read" />
+            <Bookshelf title="Currently Reading" shelves={`currentlyReading`} books={this.state.books} />
+            <Bookshelf title="Want to Read" shelves={`wantToRead`} books={this.state.books} />
+            <Bookshelf title="Read" shelves={`read`} books={this.state.books} />
           </div>
         </div>
       </div>
