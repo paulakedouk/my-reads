@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import IndividualBook from './IndividualBook';
 
-function Bookshelf(props) {
-  let dataBook = props.dataBook;
-  let shelf = props.shelf;
-  let title = props.title;
-  let moveBook;
+class Bookshelf extends Component {
+  static PropTypes = {
+    changeBook: PropTypes.func.isRequired
+  };
 
-  moveBook = dataBook.filter(book => book.shelf === shelf);
+  render() {
+    let dataBook = this.props.dataBook;
+    let shelf = this.props.shelf;
+    let title = this.props.title;
+    let moveBook;
 
-  //console.log(dataBook);
-  return (
-    <div className="bookshelf">
-      <h2 className="bookshelf-title">
-        {title}
-      </h2>
-      <div className="bookshelf-books">
-        <ol className="books-grid">
-          {moveBook.map(book => <IndividualBook book={book} key={book.id} />)}
-        </ol>
+    moveBook = dataBook.filter(book => book.shelf === shelf);
+
+    //console.log(dataBook);
+
+    return (
+      <div className="bookshelf">
+        <h2 className="bookshelf-title">
+          {title}
+        </h2>
+        <div className="bookshelf-books">
+          <ol className="books-grid">
+            {moveBook.map(book => <IndividualBook changeBook={this.props.changeBook} book={book} key={book.id} />)}
+          </ol>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Bookshelf;

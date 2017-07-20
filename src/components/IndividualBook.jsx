@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import * as BooksAPI from '../BooksAPI';
-import escapeRegExp from 'escape-string-regexp';
-import sortBy from 'sort-by';
+import PropTypes from 'prop-types';
 
 class IndividualBook extends Component {
-  state = {
-    change: ''
+  static PropTypes = {
+    book: PropTypes.object.isRequired,
+    changeBook: PropTypes.func.isRequired
   };
 
-  moveTo = (event, book) => {
-    this.setState({
-      change: event.target.value
-    });
-    BooksAPI.update(book, event.target.value);
-  };
+  updateShelf(shelf) {
+    this.props.changeBook(this.props.book, shelf);
+  }
+
+  // moveTo = (event, book) => {
+  //   this.setState({
+  //     change: event.target.value
+  //   });
+  //   BooksAPI.update(book, event.target.value);
+  // };
 
   render() {
     let book = this.props.book;
@@ -33,7 +36,7 @@ class IndividualBook extends Component {
               }}
             />
             <div className="book-shelf-changer">
-              <select value={book.shelf} onChange={event => this.moveTo(event, book)}>
+              <select value={book.shelf} onChange={event => this.updateShelf(event.target.value)}>
                 <option value="none" disabled>
                   Move to...
                 </option>

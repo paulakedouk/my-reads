@@ -15,6 +15,17 @@ class Library extends Component {
     });
   }
 
+  moveBook = (book, shelf) => {
+    if (this.state.books) {
+      BooksAPI.update(book, shelf).then(() => {
+        book.shelf = shelf;
+        this.setState(state => ({
+          books: state.books.filter(b => b.id !== book.id).concat([book])
+        }));
+      });
+    }
+  };
+
   render() {
     // console.log(this.state.books);
     return (
@@ -26,9 +37,19 @@ class Library extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf title="Currently to Reading" shelf={`currentlyReading`} dataBook={this.state.books} />
-            <Bookshelf title="Want to read" shelf={`wantToRead`} dataBook={this.state.books} />
-            <Bookshelf title="Read" shelf={`read`} dataBook={this.state.books} />
+            <Bookshelf
+              title="Currently to Reading"
+              changeBook={this.moveBook}
+              shelf={`currentlyReading`}
+              dataBook={this.state.books}
+            />
+            <Bookshelf
+              title="Want to read"
+              changeBook={this.moveBook}
+              shelf={`wantToRead`}
+              dataBook={this.state.books}
+            />
+            <Bookshelf title="Read" changeBook={this.moveBook} shelf={`read`} dataBook={this.state.books} />
           </div>
         </div>
         <div className="open-search">
