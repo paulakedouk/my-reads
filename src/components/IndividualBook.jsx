@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import * as BooksAPI from '../BooksAPI';
+import escapeRegExp from 'escape-string-regexp';
+import sortBy from 'sort-by';
 
 class IndividualBook extends Component {
   state = {
     change: ''
   };
 
-  moveTo(event, book) {
+  moveTo = (event, book) => {
     this.setState({
       change: event.target.value
     });
     BooksAPI.update(book, event.target.value);
-  }
+  };
 
   render() {
     let book = this.props.book;
-    // console.log(book);
+    // console.log(moveTo);
+
     return (
       <div>
+        {JSON.stringify(this.state)}
         <li className="book">
           <div className="book-top">
             <div
@@ -29,7 +33,7 @@ class IndividualBook extends Component {
               }}
             />
             <div className="book-shelf-changer">
-              <select value={this.state.change} onChange={event => this.moveTo(event, book)}>
+              <select value={book.shelf} onChange={event => this.moveTo(event, book)}>
                 <option value="none" disabled>
                   Move to...
                 </option>

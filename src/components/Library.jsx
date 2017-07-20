@@ -26,7 +26,7 @@ class Library extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf title="Currently Reading" shelf={`currentlyReading`} dataBook={this.state.books} />
+            <Bookshelf title="Currently to Reading" shelf={`currentlyReading`} dataBook={this.state.books} />
             <Bookshelf title="Want to read" shelf={`wantToRead`} dataBook={this.state.books} />
             <Bookshelf title="Read" shelf={`read`} dataBook={this.state.books} />
           </div>
