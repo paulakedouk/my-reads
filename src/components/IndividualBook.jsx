@@ -24,7 +24,7 @@ class IndividualBook extends Component {
 
     return (
       <div>
-        {JSON.stringify(this.state)}
+        {/* JSON.stringify(this.state) */}
         <li className="book">
           <div className="book-top">
             <div
