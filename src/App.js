@@ -8,9 +8,9 @@ import Search from './components/Search';
 import './App.css';
 
 class App extends Component {
-  static propTypes = {
-    book: PropTypes.object.isRequired,
-    router: React.PropTypes.object.isRequired
+  static PropTypes = {
+    moveBook: PropTypes.func.isRequired,
+    books: PropTypes.object.isRequired
   };
 
   state = {
