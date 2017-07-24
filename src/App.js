@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI';
 import Bookshelf from './components/Bookshelf';
 import { Link } from 'react-router-dom';
@@ -7,6 +8,11 @@ import Search from './components/Search';
 import './App.css';
 
 class App extends Component {
+  static propTypes = {
+    book: PropTypes.object.isRequired,
+    router: React.PropTypes.object.isRequired
+  };
+
   state = {
     books: []
   };
@@ -38,7 +44,10 @@ class App extends Component {
     // console.log(this.state.books);
     return (
       <div className="app">
-        <Route path="/search" render={() => <Search dataBook={this.state.books} moveBook={this.moveBook} />} />
+        <Route
+          path="/search"
+          render={() => <Search dataBook={this.state.books} moveBook={this.moveBook.bind(this)} />}
+        />
         <Route
           exact
           path="/"
@@ -52,17 +61,22 @@ class App extends Component {
                 <div>
                   <Bookshelf
                     title="Currently to Reading"
-                    moveBook={this.moveBook}
+                    moveBook={this.moveBook.bind(this)}
                     shelf={`currentlyReading`}
                     dataBook={this.state.books}
                   />
                   <Bookshelf
                     title="Want to read"
-                    moveBook={this.moveBook}
+                    moveBook={this.moveBook.bind(this)}
                     shelf={`wantToRead`}
                     dataBook={this.state.books}
                   />
-                  <Bookshelf title="Read" moveBook={this.moveBook} shelf={`read`} dataBook={this.state.books} />
+                  <Bookshelf
+                    title="Read"
+                    moveBook={this.moveBook.bind(this)}
+                    shelf={`read`}
+                    dataBook={this.state.books}
+                  />
                 </div>
               </div>
               <div className="open-search">

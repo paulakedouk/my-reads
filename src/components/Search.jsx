@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as BooksAPI from '../BooksAPI';
 import IndividualBook from './IndividualBook';
 
 class Search extends Component {
-  // static propTypes = {
-  //   dataBook: PropTypes.array
-  // };
+  static propTypes = {
+    dataBook: PropTypes.array,
+    moveBook: PropTypes.func.isRequired
+  };
 
   state = {
     query: '',
