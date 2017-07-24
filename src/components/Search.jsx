@@ -1,35 +1,38 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import sortBy from 'sort-by';
+// import PropTypes from 'prop-types';
 import * as BooksAPI from '../BooksAPI';
 import IndividualBook from './IndividualBook';
 
 class Search extends Component {
-  static propTypes = {
-    dataBook: PropTypes.array
-  };
+  // static propTypes = {
+  //   dataBook: PropTypes.array
+  // };
 
   state = {
     query: '',
     books: []
   };
 
-  handleChange = query => {
-    if (!query) {
-      this.setState({ query: '', books: [] });
-    } else {
-      this.setState({ query: query.trim() });
-      BooksAPI.search(query, 10).then(books => {
-        books.map(book => this.props.dataBook.filter(b => b.id === book.id).map(b => (book.shelf = b.shelf)));
-        this.setState({ books });
-      });
-    }
+  updateQuery = query => {
+    BooksAPI.search(query).then(books => (books ? this.setState({ books }) : []));
+    this.setState({ query });
   };
 
-  render() {
-    let books = this.state.books;
+  showSearchResults() {
+    const { books, query } = this.state;
+    let moveBook = this.props.moveBook;
 
+    if (query) {
+      return books.error
+        ? <div>No results found</div>
+        : books.map((book, index) => {
+            return <IndividualBook moveBook={moveBook} key={book.id} book={book} />;
+          });
+    }
+  }
+
+  render() {
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -42,15 +45,13 @@ class Search extends Component {
               type="text"
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={event => this.handleChange(event.target.value)}
+              onChange={event => this.updateQuery(event.target.value)}
             />
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {books
-              .sort(sortBy('title'))
-              .map(book => <IndividualBook dataBook={this.state.books} book={book ? book : null} key={book.id} />)}
+            {this.showSearchResults()}
           </ol>
         </div>
       </div>

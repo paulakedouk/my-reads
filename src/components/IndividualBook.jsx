@@ -4,22 +4,15 @@ import PropTypes from 'prop-types';
 class IndividualBook extends Component {
   static PropTypes = {
     book: PropTypes.object.isRequired,
-    changeBook: PropTypes.func.isRequired
+    moveBook: PropTypes.func.isRequired
   };
 
-  updateShelf(shelf) {
-    this.props.changeBook(this.props.book, shelf);
-  }
-
-  // moveTo = (event, book) => {
-  //   this.setState({
-  //     change: event.target.value
-  //   });
-  //   BooksAPI.update(book, event.target.value);
-  // };
+  state = {
+    value: 'none'
+  };
 
   render() {
-    let book = this.props.book;
+    let { book, moveBook } = this.props;
     // console.log(moveTo);
 
     return (
@@ -36,7 +29,7 @@ class IndividualBook extends Component {
               }}
             />
             <div className="book-shelf-changer">
-              <select value={book.shelf} onChange={event => this.updateShelf(event.target.value)}>
+              <select value={book.shelf} onChange={event => moveBook(book, event.target.value)}>
                 <option value="none" disabled>
                   Move to...
                 </option>

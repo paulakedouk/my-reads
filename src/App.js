@@ -20,7 +20,11 @@ class App extends Component {
   }
 
   moveBook = (book, shelf) => {
-    if (this.state.books) {
+    if (!this.state.books) {
+      BooksAPI.update(book, shelf)
+        .then(() => (shelf !== 'none' ? this.context.router.history.push('/') : null))
+        .catch(() => alert('Something went wrong! Please try again!'));
+    } else {
       BooksAPI.update(book, shelf).then(() => {
         book.shelf = shelf;
         this.setState(state => ({
@@ -31,9 +35,10 @@ class App extends Component {
   };
 
   render() {
+    // console.log(this.state.books);
     return (
       <div className="app">
-        <Route path="/search" render={() => <Search dataBook={this.state.books} />} />
+        <Route path="/search" render={() => <Search dataBook={this.state.books} moveBook={this.moveBook} />} />
         <Route
           exact
           path="/"
@@ -47,17 +52,17 @@ class App extends Component {
                 <div>
                   <Bookshelf
                     title="Currently to Reading"
-                    changeBook={this.moveBook}
+                    moveBook={this.moveBook}
                     shelf={`currentlyReading`}
                     dataBook={this.state.books}
                   />
                   <Bookshelf
                     title="Want to read"
-                    changeBook={this.moveBook}
+                    moveBook={this.moveBook}
                     shelf={`wantToRead`}
                     dataBook={this.state.books}
                   />
-                  <Bookshelf title="Read" changeBook={this.moveBook} shelf={`read`} dataBook={this.state.books} />
+                  <Bookshelf title="Read" moveBook={this.moveBook} shelf={`read`} dataBook={this.state.books} />
                 </div>
               </div>
               <div className="open-search">
