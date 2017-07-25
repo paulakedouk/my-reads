@@ -21,10 +21,12 @@ class Search extends Component {
   };
 
   showSearchResults() {
-    const { books, query } = this.state;
+    const { books } = this.state;
     let moveBook = this.props.moveBook;
 
-    if (query) {
+    if (this.state.books != books) {
+      this.setState({ books });
+    } else {
       return books.error
         ? <div>No results found</div>
         : books.map((book, index) => {
