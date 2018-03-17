@@ -1,13 +1,21 @@
-# MyReads by Paula Kedouk - Udacity React Nanodegree
+## MyReads Project - Udacity React Nanodegree
 
-## Instalation
+The focus of this project is on writing functional React code.
 
-  1. Clone this repo:
+<img src="public/my-reads.gif" />
+
+# Instalation
+1. Clone this repo:
 ```
 git clone https://github.com/paulakedouk/my-reads.git
 ```
 
-2. Install dependencies:
+2. Open that folder:
+```
+cd my-reads
+```
+
+3. Install dependencies:
 ```
 npm install
 ```
